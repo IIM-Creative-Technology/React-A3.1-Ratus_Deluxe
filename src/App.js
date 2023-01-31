@@ -1,5 +1,6 @@
 import './App.css'
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // Le composant App qui affiche la liste des films populaires
 function App() {
@@ -45,7 +46,7 @@ function App() {
       ) : (
         <div id="conteneur_film">
           {films.slice(0, 10).map((film) => (
-            <div key={film.id}>
+            <Link to={`/movies/${film.id}`} key={film.id}>
               <img
                 src={`https://image.tmdb.org/t/p/w200${film.poster_path}`}
                 alt={film.title}
@@ -53,7 +54,7 @@ function App() {
               <p>
                 {film.title} ({film.release_date.substring(0, 4)})
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       )}
