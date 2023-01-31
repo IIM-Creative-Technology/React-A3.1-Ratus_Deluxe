@@ -1,65 +1,67 @@
+import './App.css'
 import React, { useState, useEffect } from "react";
 
+// Le composant App qui affiche la liste des films populaires
 function App() {
-  // Déclare un état qui stockera les films récupérés depuis l'API TMDB
-  const [movies, setMovies] = useState([]);
+  // État qui stocke les films récupérés depuis l'API TMDB
+  const [films, setFilms] = useState([]);
 
-  // Déclare un état qui stockera la page actuelle
-  const [currentPage, setCurrentPage] = useState(1);
+  // État qui stocke la page actuelle
+  const [pageActuelle, setPageActuelle] = useState(1);
 
-  // Déclare un état qui indique si les données sont en train d'être chargées
-  const [isLoading, setIsLoading] = useState(false);
+  // État qui indique si les données sont en train de charger
+  const [enChargement, setEnChargement] = useState(false);
 
   // Lorsque la page actuelle change, effectue un fetch depuis l'API TMDB
   useEffect(() => {
-    setIsLoading(true); // Définit le chargement comme étant en cours
+    setEnChargement(true); // Définit que les données sont en train de charger
 
-    // Effectue un fetch à l'URL spécifié en incluant la clé API et la page actuelle
+    // Fetch à l'URL spécifié avec la clé API et la page actuelle
     fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=921efa34cf5f2f43581894a65a4dd941&language=en-US&page=${currentPage}`
+      `https://api.themoviedb.org/3/movie/popular?api_key=921efa34cf5f2f43581894a65a4dd941&language=en-US&page=${pageActuelle}`
     )
       .then((res) => res.json()) // Transforme la réponse en JSON
       .then((data) => {
-        setMovies(data.results); // Stock les films récupérés dans l'état "movies"
-        setIsLoading(false); // Définit le chargement comme étant terminé
+        setFilms(data.results); // Stocke les films récupérés dans l'état "films"
+        setEnChargement(false); // Définit que les données ont fini de charger
       });
-  }, [currentPage]); // La dépendance "currentPage" signifie que cet effet ne sera exécuté que lorsque "currentPage" change
+  }, [pageActuelle]); // L'effet ne sera exécuté que si la page actuelle change
 
   // Augmente la page actuelle de 1
-  const handleNext = () => {
-    setCurrentPage(currentPage + 1);
+  const handleSuivant = () => {
+    setPageActuelle(pageActuelle + 1);
   };
 
   // Diminue la page actuelle de 1
-  const handlePrev = () => {
-    setCurrentPage(currentPage - 1);
+  const handlePrecedent = () => {
+    setPageActuelle(pageActuelle - 1);
   };
 
   return (
-    <div className="App">
-      <h2>List of Popular Movies</h2>
-      {isLoading ? (
-        <p>Loading...</p>
+    <div className='App'>
+      <h2>Liste des Films Populaires</h2>
+      {enChargement ? (
+        <p>Chargement...</p>
       ) : (
-        <div>
-          {movies.slice(0, 10).map((movie) => (
-            <div key={movie.id}>
+        <div id="conteneur_film">
+          {films.slice(0, 10).map((film) => (
+            <div key={film.id}>
               <img
-                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                alt={movie.title}
+                src={`https://image.tmdb.org/t/p/w200${film.poster_path}`}
+                alt={film.title}
               />
               <p>
-                {movie.title} ({movie.release_date.substring(0, 4)})
+                {film.title} ({film.release_date.substring(0, 4)})
               </p>
             </div>
           ))}
         </div>
       )}
-      <button onClick={handlePrev} disabled={currentPage === 1}>
-        Prev
+      <button onClick={handlePrecedent} disabled={pageActuelle === 1}>
+        Précédent
       </button>
-      <button onClick={handleNext} disabled={movies.length < 10}>
-        Next
+      <button onClick={handleSuivant} disabled={films.length < 10}>
+        Suivant
       </button>
     </div>
   );

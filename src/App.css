@@ -1,0 +1,71 @@
+.App {
+  text-align: center;
+  padding: 1rem 0rem;
+}
+
+#conteneur_film {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 2.5rem 1.25rem;
+  margin: 1rem auto;
+  width: 80%;
+}
+
+#conteneur_film div {
+  transition: all 0.2s ease-in-out;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0.5rem 0.5rem 1.25rem rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  margin: 1rem;
+  text-align: center;
+  width: 12.5rem;
+}
+
+#conteneur_film div:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+p {
+  padding: 0 1.25rem;
+}
+
+img {
+  border-radius: 1rem 1rem 0 0;
+  object-fit: cover;
+  width: 100%;
+}
+
+button {
+  background-color: #2196f3;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #1e88e5;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  #conteneur_film {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-gap: 0;
+  }
+}
