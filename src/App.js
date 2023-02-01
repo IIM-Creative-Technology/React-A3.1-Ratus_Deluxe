@@ -41,16 +41,18 @@ function App() {
     setPageActuelle(pageActuelle - 1);
   };
 
-  var isfilterenlish = false;
+  var isfilterenglish = false;
   var isfilterintheater = false;
+
+  // Fonction qui filtre les films en anglais
 
   const handleEnglish = () => {
     const filterEnglish = films.filter((film) => {
       return film.original_language === "en";
     });
-    isfilterenlish = !isfilterenlish;
-    console.log(isfilterenlish);
-    if (isfilterenlish === true) {
+    isfilterenglish = !isfilterenglish;
+    console.log(isfilterenglish);
+    if (isfilterenglish === true) {
       
       setFilms(filterEnglish);
     } else {
@@ -58,6 +60,8 @@ function App() {
     }
 
   };
+
+  // Fonction qui filtre les films à l'affiche
 
   const handleIntheaters = () => {
     const filterReleasedate = films.filter((film) => {
