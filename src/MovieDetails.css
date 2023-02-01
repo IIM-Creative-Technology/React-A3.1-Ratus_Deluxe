@@ -1,13 +1,37 @@
 .MovieDetails {
+    font-size: 17.5px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 50px;
 }
 
-.MovieDetails img {
+.Movie {
+    display: flex;
+    align-items: center;
+    gap: 75px;
+}
+
+.Movie .image img {
     width: 300px;
     margin-bottom: 3px;
     margin-top: 10px;
+    border-radius: 0 !important;
+}
+
+.Movie .informations {
+    width: 500px;
+}
+
+.informations p {
+    padding: 0 !important;
+}
+
+#data_container {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
 }
 
 .MovieDetails h1 {
@@ -15,9 +39,16 @@
 }
 
 .MovieDetails button {
-    padding: 10px 20px;
-    background-color: lightgray;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 500px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.MovieDetails button:hover {
+    background-color: #f5f5f5;
+    color: #000;
+    border: 2px solid #000;
+    transition: 0.5s;
 }

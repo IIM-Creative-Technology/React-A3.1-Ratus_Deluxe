@@ -53,64 +53,76 @@ function MovieDetails() {
   return (
     <div className="MovieDetails">
       <button onClick={() => window.history.back()}>Go Back</button>
-      <img
-        src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-        alt={movie.title}
-      />
-      <h1>{movie.title}</h1>
-      <p>{movie.overview}</p>
-      <div className="movie_infos">
-        <p>Movie title : {movie.title}</p>
-
-        <p>Original Title: {movie.original_title}</p>
-        <p>Runtime: {movie.runtime} minutes</p>
+      <div className="Movie">
+        <div className="image">
+          <img
+            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+            alt={movie.title}
+          />
+        </div>
+        <div className="informations">
+          <h1>{movie.title}</h1>
+          <p>{movie.overview}</p>
+        </div>
       </div>
-      <div className="movie_data">
-        <p>
-          Original Language:{" "}
-          <FlagIcon code={getFlagCode(movie.original_language)} />
-        </p>
-      <p>Genres: {movie.genres.map((genre) => genre.name).join(", ")}</p>
-        <p>Status: {movie.status}</p>
-        <p>Release Date: {movie.release_date}</p>
-      </div>
-      <div className="movie_stats">
-        <p>
-          Rating: {Math.round(movie.vote_average * 10)}% positives votes on{" "}
-          {movie.vote_count} votes
-        </p>
+      <div id="data_container">
+        <div className="movie_infos">
+          <p>Movie title : {movie.title}</p>
 
-        
-          <p style={{ display: "flex", alignItems: "center" }}>
-          Popularity: <DisplayStars score={movie.popularity} />
+          <p>Original Title: {movie.original_title}</p>
+          <p>Runtime: {movie.runtime} minutes</p>
+        </div>
+        <div className="movie_data">
+          <p>
+            Original Language:{" "}
+            <FlagIcon code={getFlagCode(movie.original_language)} />
           </p>
-        
-      </div>
-      
-      <div className="movie_team">
-      <p>
-        Production Companies:{" "}
-        {movie.production_companies.map((company) => company.name).join(", ")}
-      </p>
-      <p>
-        Production Countries:{" "}
-        {movie.production_countries.map((country) => country.name).join(", ")}
-      </p>
-      <p>
-        Belongs To Collection:{" "}
-        {movie.belongs_to_collection ? movie.belongs_to_collection.name : "No"}
-      </p>
-      <p>Budget: {movie.budget ? formatCurrency(movie.budget) : "No Data"}</p>
-      <p>
-        Revenue: {movie.revenue ? formatCurrency(movie.revenue) : "No Data"}
-      </p>
-      </div>
-      
-      <p>
-        Watch here : <a href={movie.homepage}>{movie.homepage}</a>
-      </p>
+          <p>Genres: {movie.genres.map((genre) => genre.name).join(", ")}</p>
+          <p>Status: {movie.status}</p>
+          <p>Release Date: {movie.release_date}</p>
+        </div>
+        <div className="movie_stats">
+          <p>
+            Rating: {Math.round(movie.vote_average * 10)}% positives votes on{" "}
+            {movie.vote_count} votes
+          </p>
 
-      
+          <p style={{ display: "flex", alignItems: "center" }}>
+            Popularity: <DisplayStars score={movie.popularity} />
+          </p>
+        </div>
+
+        <div className="movie_team">
+          <p>
+            Production Companies:{" "}
+            {movie.production_companies
+              .map((company) => company.name)
+              .join(", ")}
+          </p>
+          <p>
+            Production Countries:{" "}
+            {movie.production_countries
+              .map((country) => country.name)
+              .join(", ")}
+          </p>
+          <p>
+            Belongs To Collection:{" "}
+            {movie.belongs_to_collection
+              ? movie.belongs_to_collection.name
+              : "No"}
+          </p>
+          <p>
+            Budget: {movie.budget ? formatCurrency(movie.budget) : "No Data"}
+          </p>
+          <p>
+            Revenue: {movie.revenue ? formatCurrency(movie.revenue) : "No Data"}
+          </p>
+        </div>
+      </div>
+
+      <button>
+        Watch here : <a href={movie.homepage}>{movie.homepage}</a>
+      </button>
     </div>
   );
 }
