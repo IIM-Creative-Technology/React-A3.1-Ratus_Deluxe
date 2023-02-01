@@ -1,7 +1,7 @@
 import "./MovieDetails.css";
 import React from "react";
 import { useParams } from "react-router-dom";
-import FlagIcon from "react-flag-icon-css";
+import FlagIcon from "./components/FlagIcon.js";
 
 function MovieDetails() {
   const { id } = useParams();
@@ -29,7 +29,8 @@ function MovieDetails() {
     }).format(amount);
   }
 
-  const languageCode = movie.original_language;
+  
+
 
   return (
     <div className="MovieDetails">
@@ -58,10 +59,11 @@ function MovieDetails() {
         Homepage: <a href={movie.homepage}>{movie.homepage}</a>
       </p>
       <p>IMDB ID: {movie.imdb_id}</p>
+
       <p>
-        Original Language:
-        <FlagIcon code={languageCode.toLowerCase()} /> {languageCode}
+        Original Language: <FlagIcon code={movie.original_language === "en" ? "gb" : movie.original_language } />
       </p>
+
       <p>Original Title: {movie.original_title}</p>
       <p>Popularity: {movie.popularity}</p>
       <p>Status: {movie.status}</p>
