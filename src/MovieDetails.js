@@ -44,55 +44,104 @@ function MovieDetails() {
     comments.appendChild(newComment);
     document.getElementById("comment").value = "";
   }
+  const languageCodeMap = {
+    en: "gb",
+    ko: "kr",
+    ja: "jp",
+    zh: "cn",
+  };
+
+  const getFlagCode = (language) => {
+    return languageCodeMap[language] || language;
+  };
+
+  function DisplayStars({ score }) {
+    const maxStars = 5;
+    const starPercentage = (score / 1000) * maxStars;
+    const starDisplay = Array.from({ length: maxStars }, (_, index) => {
+      const starValue = index + 1;
+      return starValue <= starPercentage ? "⭐️" : "☆";
+    });
+    return <div>{starDisplay.join("")}</div>;
+  }
 
   return (
     <div className="MovieDetails">
       <button onClick={() => window.history.back()}>Go Back</button>
-      <img
-        src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-        alt={movie.title}
-      />
-      <h1>{movie.title}</h1>
-      <p>{movie.overview}</p>
-      <p>Rating: {movie.vote_average}</p>
-      <p>Release Date: {movie.release_date}</p>
-      <p>Runtime: {movie.runtime} minutes</p>
-      <p>Genres: {movie.genres.map((genre) => genre.name).join(", ")}</p>
-      <p>
-        Production Companies:{" "}
-        {movie.production_companies.map((company) => company.name).join(", ")}
-      </p>
-      <p>
-        Production Countries:{" "}
-        {movie.production_countries.map((country) => country.name).join(", ")}
-      </p>
-      <p>Tagline: {movie.tagline}</p>
-      <p>Revenue: {formatCurrency(movie.revenue)}</p>
-      <p>Budget: {formatCurrency(movie.budget)}</p>
-      <p>
-        Homepage: <a href={movie.homepage}>{movie.homepage}</a>
-      </p>
-      <p>IMDB ID: {movie.imdb_id}</p>
+      <div className="Movie">
+        <div className="image">
+          <img
+            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+            alt={movie.title}
+          />
+        </div>
+        <div className="informations">
+          <h1>{movie.title}</h1>
+          <p>{movie.overview}</p>
+        </div>
+      </div>
+      <div id="data_container">
+        <div className="movie_infos">
+          <p>Movie title : {movie.title}</p>
 
-      <p>
-        Original Language: <FlagIcon code={movie.original_language === "en" ? "gb" : movie.original_language } />
-      </p>
+          <p>Original Title: {movie.original_title}</p>
+          <p>Runtime: {movie.runtime} minutes</p>
+        </div>
+        <div className="movie_data">
+          <p>
+            Original Language:{" "}
+            <FlagIcon code={getFlagCode(movie.original_language)} />
+          </p>
+          <p>Genres: {movie.genres.map((genre) => genre.name).join(", ")}</p>
+          <p>Status: {movie.status}</p>
+          <p>Release Date: {movie.release_date}</p>
+        </div>
+        <div className="movie_stats">
+          <p>
+            Rating: {Math.round(movie.vote_average * 10)}% positives votes on{" "}
+            {movie.vote_count} votes
+          </p>
 
-      <p>Original Title: {movie.original_title}</p>
-      <p>Popularity: {movie.popularity}</p>
-      <p>Status: {movie.status}</p>
-      <p>Video: {movie.video ? "Yes" : "No"}</p>
-      <p>Votes: {movie.vote_count}</p>
-      <p>Adult: {movie.adult ? "Yes" : "No"}</p>
-      <p>Backdrop Path: {movie.backdrop_path}</p>
-      <p>
-        Belongs To Collection:{" "}
-        {movie.belongs_to_collection ? movie.belongs_to_collection.name : "No"}
-      </p>
-      <div>
+          <p style={{ display: "flex", alignItems: "center" }}>
+            Popularity: <DisplayStars score={movie.popularity} />
+          </p>
+        </div>
+
+        <div className="movie_team">
+          <p>
+            Production Companies:{" "}
+            {movie.production_companies
+              .map((company) => company.name)
+              .join(", ")}
+          </p>
+          <p>
+            Production Countries:{" "}
+            {movie.production_countries
+              .map((country) => country.name)
+              .join(", ")}
+          </p>
+          <p>
+            Belongs To Collection:{" "}
+            {movie.belongs_to_collection
+              ? movie.belongs_to_collection.name
+              : "No"}
+          </p>
+          <p>
+            Budget: {movie.budget ? formatCurrency(movie.budget) : "No Data"}
+          </p>
+          <p>
+            Revenue: {movie.revenue ? formatCurrency(movie.revenue) : "No Data"}
+          </p>
+        </div>
+      </div>
+
+      <button>
+        Watch here : <a href={movie.homepage}>{movie.homepage}</a>
+      </button>
         <button onClick={addComment}>Add Comment</button>
         <textarea id="comment" />
         <div id="comments"></div>
+      <div>
       </div>
     </div>
   );
