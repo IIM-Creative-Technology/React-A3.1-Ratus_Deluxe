@@ -29,6 +29,9 @@ function MovieDetails() {
     }).format(amount);
   }
 
+  
+
+
   return (
     <div className="MovieDetails">
       <img
@@ -58,7 +61,7 @@ function MovieDetails() {
       <p>IMDB ID: {movie.imdb_id}</p>
 
       <p>
-        Original Language: <FlagIcon code={movie.original_language} />
+        Original Language: <FlagIcon code={movie.original_language === "en" ? "gb" : movie.original_language } />
       </p>
 
       <p>Original Title: {movie.original_title}</p>
