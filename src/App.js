@@ -7,6 +7,8 @@ function App() {
   // État qui stocke les films récupérés depuis l'API TMDB
   const [films, setFilms] = useState([]);
 
+  const [filmsRaw, setFilmsRaw] = useState([]);
+
   // État qui stocke la page actuelle
   const [pageActuelle, setPageActuelle] = useState(1);
 
@@ -24,6 +26,7 @@ function App() {
       .then((res) => res.json()) // Transforme la réponse en JSON
       .then((data) => {
         setFilms(data.results); // Stocke les films récupérés dans l'état "films"
+        setFilmsRaw(data.results); // Stocke les films récupérés dans l'état "filmsRaw"
         setEnChargement(false); // Définit que les données ont fini de charger
       });
   }, [pageActuelle]); // L'effet ne sera exécuté que si la page actuelle change
@@ -38,9 +41,48 @@ function App() {
     setPageActuelle(pageActuelle - 1);
   };
 
+  var isfilterenlish = false;
+  var isfilterintheater = false;
+
+  const handleEnglish = () => {
+    const filterEnglish = films.filter((film) => {
+      return film.original_language === "en";
+    });
+    isfilterenlish = !isfilterenlish;
+    console.log(isfilterenlish);
+    if (isfilterenlish === true) {
+      
+      setFilms(filterEnglish);
+    } else {
+      setFilms(films);
+    }
+
+  };
+
+  const handleIntheaters = () => {
+    const filterReleasedate = films.filter((film) => {
+      return film.release_date > "2022-12-01";
+    });
+    isfilterintheater = !isfilterintheater;
+    console.log(isfilterintheater);  
+    if (isfilterintheater === true) {
+      
+      setFilms(filterReleasedate);
+    } else {
+      setFilms(films);
+    }
+  };
+
+  const handlePopular = () => {
+    setFilms(filmsRaw);
+  };
+
   return (
     <div className='App'>
       <h2>Liste des Films Populaires</h2>
+      <button onClick={handlePopular}>Films Populaires</button>
+      <button onClick={handleEnglish}>En anglais</button>
+      <button onClick={handleIntheaters}>À l'affiche</button>
       {enChargement ? (
         <p>Chargement...</p>
       ) : (
