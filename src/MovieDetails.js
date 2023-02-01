@@ -1,13 +1,18 @@
 import "./MovieDetails.css";
-import React from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import FlagIcon from "./components/FlagIcon.js";
 
+// Component qui affiche les détails d'un film
 function MovieDetails() {
+  // Récupération de l'ID du film à partir des paramètres de l'URL
   const { id } = useParams();
-  const [movie, setMovie] = React.useState(null);
 
-  React.useEffect(() => {
+  // Etat pour stocker les informations du film
+  const [movie, setMovie] = useState(null);
+
+  // Effet qui charge les informations du film à partir de l'API
+  useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/movie/${id}?api_key=921efa34cf5f2f43581894a65a4dd941&language=en-US`
     )
@@ -17,10 +22,12 @@ function MovieDetails() {
       });
   }, [id]);
 
+  // Affiche "Chargement..." tant que les informations du film n'ont pas été chargées
   if (!movie) {
     return <p>Loading...</p>;
   }
 
+  // Formate un montant en tant que devise (USD)
   function formatCurrency(amount) {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -28,9 +35,6 @@ function MovieDetails() {
       minimumFractionDigits: 2,
     }).format(amount);
   }
-
-  
-
 
   return (
     <div className="MovieDetails">
