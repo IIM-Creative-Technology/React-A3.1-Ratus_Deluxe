@@ -34,6 +34,7 @@ function MovieDetails() {
 
   return (
     <div className="MovieDetails">
+      <button onClick={() => window.history.back()}>Go Back</button>
       <img
         src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
         alt={movie.title}
@@ -75,7 +76,6 @@ function MovieDetails() {
         Belongs To Collection:{" "}
         {movie.belongs_to_collection ? movie.belongs_to_collection.name : "No"}
       </p>
-      <button onClick={() => window.history.back()}>Go Back</button>
     </div>
   );
 }
