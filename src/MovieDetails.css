@@ -32,7 +32,6 @@
     grid-template-columns: 0.53fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 10px;
-    justify-items: end;
 }
 
 .MovieDetails h1 {
