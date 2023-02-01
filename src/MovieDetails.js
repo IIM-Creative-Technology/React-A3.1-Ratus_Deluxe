@@ -59,10 +59,35 @@ function MovieDetails() {
       />
       <h1>{movie.title}</h1>
       <p>{movie.overview}</p>
-      <p>Rating: {Math.round(movie.vote_average * 10)}% positives votes on {movie.vote_count} votes</p>
-      <p>Release Date: {movie.release_date}</p>
-      <p>Runtime: {movie.runtime} minutes</p>
+      <div className="movie_infos">
+        <p>Movie title : {movie.title}</p>
+
+        <p>Original Title: {movie.original_title}</p>
+        <p>Runtime: {movie.runtime} minutes</p>
+      </div>
+      <div className="movie_data">
+        <p>
+          Original Language:{" "}
+          <FlagIcon code={getFlagCode(movie.original_language)} />
+        </p>
       <p>Genres: {movie.genres.map((genre) => genre.name).join(", ")}</p>
+        <p>Status: {movie.status}</p>
+        <p>Release Date: {movie.release_date}</p>
+      </div>
+      <div className="movie_stats">
+        <p>
+          Rating: {Math.round(movie.vote_average * 10)}% positives votes on{" "}
+          {movie.vote_count} votes
+        </p>
+
+        
+          <p style={{ display: "flex", alignItems: "center" }}>
+          Popularity: <DisplayStars score={movie.popularity} />
+          </p>
+        
+      </div>
+      
+      <div className="movie_team">
       <p>
         Production Companies:{" "}
         {movie.production_companies.map((company) => company.name).join(", ")}
@@ -72,29 +97,20 @@ function MovieDetails() {
         {movie.production_countries.map((country) => country.name).join(", ")}
       </p>
       <p>
-        Revenue: {movie.revenue ? formatCurrency(movie.revenue) : "No Data"}
+        Belongs To Collection:{" "}
+        {movie.belongs_to_collection ? movie.belongs_to_collection.name : "No"}
       </p>
       <p>Budget: {movie.budget ? formatCurrency(movie.budget) : "No Data"}</p>
+      <p>
+        Revenue: {movie.revenue ? formatCurrency(movie.revenue) : "No Data"}
+      </p>
+      </div>
+      
       <p>
         Watch here : <a href={movie.homepage}>{movie.homepage}</a>
       </p>
 
-      <p>
-        Original Language:{" "}
-        <FlagIcon code={getFlagCode(movie.original_language)} />
-      </p>
-
-      <p>Original Title: {movie.original_title}</p>
-
-      <div style={{ display: "flex", alignItems: "center" }}>
-        Popularity: <DisplayStars score={movie.popularity} />
-      </div>
-
-      <p>Status: {movie.status}</p>
-      <p>
-        Belongs To Collection:{" "}
-        {movie.belongs_to_collection ? movie.belongs_to_collection.name : "No"}
-      </p>
+      
     </div>
   );
 }
