@@ -29,8 +29,26 @@ function MovieDetails() {
     }).format(amount);
   }
 
-  
+  const languageCodeMap = {
+    en: "gb",
+    ko: "kr",
+    ja: "jp",
+    zh: "cn",
+  };
 
+  const getFlagCode = (language) => {
+    return languageCodeMap[language] || language;
+  };
+
+  function DisplayStars({ score }) {
+    const maxStars = 5;
+    const starPercentage = (score / 1000) * maxStars;
+    const starDisplay = Array.from({ length: maxStars }, (_, index) => {
+      const starValue = index + 1;
+      return starValue <= starPercentage ? "⭐️" : "☆";
+    });
+    return <div>{starDisplay.join("")}</div>;
+  }
 
   return (
     <div className="MovieDetails">
@@ -41,7 +59,7 @@ function MovieDetails() {
       />
       <h1>{movie.title}</h1>
       <p>{movie.overview}</p>
-      <p>Rating: {movie.vote_average}</p>
+      <p>Rating: {Math.round(movie.vote_average * 10)}% positives votes on {movie.vote_count} votes</p>
       <p>Release Date: {movie.release_date}</p>
       <p>Runtime: {movie.runtime} minutes</p>
       <p>Genres: {movie.genres.map((genre) => genre.name).join(", ")}</p>
@@ -53,25 +71,26 @@ function MovieDetails() {
         Production Countries:{" "}
         {movie.production_countries.map((country) => country.name).join(", ")}
       </p>
-      <p>Tagline: {movie.tagline}</p>
-      <p>Revenue: {formatCurrency(movie.revenue)}</p>
-      <p>Budget: {formatCurrency(movie.budget)}</p>
       <p>
-        Homepage: <a href={movie.homepage}>{movie.homepage}</a>
+        Revenue: {movie.revenue ? formatCurrency(movie.revenue) : "No Data"}
       </p>
-      <p>IMDB ID: {movie.imdb_id}</p>
+      <p>Budget: {movie.budget ? formatCurrency(movie.budget) : "No Data"}</p>
+      <p>
+        Watch here : <a href={movie.homepage}>{movie.homepage}</a>
+      </p>
 
       <p>
-        Original Language: <FlagIcon code={movie.original_language === "en" ? "gb" : movie.original_language } />
+        Original Language:{" "}
+        <FlagIcon code={getFlagCode(movie.original_language)} />
       </p>
 
       <p>Original Title: {movie.original_title}</p>
-      <p>Popularity: {movie.popularity}</p>
+
+      <div style={{ display: "flex", alignItems: "center" }}>
+        Popularity: <DisplayStars score={movie.popularity} />
+      </div>
+
       <p>Status: {movie.status}</p>
-      <p>Video: {movie.video ? "Yes" : "No"}</p>
-      <p>Votes: {movie.vote_count}</p>
-      <p>Adult: {movie.adult ? "Yes" : "No"}</p>
-      <p>Backdrop Path: {movie.backdrop_path}</p>
       <p>
         Belongs To Collection:{" "}
         {movie.belongs_to_collection ? movie.belongs_to_collection.name : "No"}
