@@ -36,6 +36,15 @@ function MovieDetails() {
     }).format(amount);
   }
 
+  function addComment() {
+    var comment = document.getElementById("comment").value;
+    var comments = document.getElementById("comments");
+    var newComment = document.createElement("pre");
+    newComment.innerHTML = comment;
+    comments.appendChild(newComment);
+    document.getElementById("comment").value = "";
+  }
+
   return (
     <div className="MovieDetails">
       <button onClick={() => window.history.back()}>Go Back</button>
@@ -80,6 +89,11 @@ function MovieDetails() {
         Belongs To Collection:{" "}
         {movie.belongs_to_collection ? movie.belongs_to_collection.name : "No"}
       </p>
+      <div>
+        <button onClick={addComment}>Add Comment</button>
+        <textarea id="comment" />
+        <div id="comments"></div>
+      </div>
     </div>
   );
 }
