@@ -1,54 +1,71 @@
-.MovieDetails {
-    font-size: 17.5px;
+@import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
+
+* {
+  font-family: "Staatliches", cursive;
+  letter-spacing: 0.05rem;
+}
+
+body {
+    padding: 1rem 0rem;
+}
+
+h1 {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+p {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+hr {
+    margin: 2rem 0 !important;
+    opacity: 0 !important;
+}
+
+#details_content {
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2.5rem 1.25rem;
+  margin: 1rem auto;
+  width: 80%;
+  justify-items: center;
+  align-items: center;
+}
+
+#details_id {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2.5rem 1.25rem;
+    margin: 1rem auto;
+    width: 80%;
+    justify-items: center;
+    align-items: center;
+}
+
+#details_id img {
+  width: 15rem;
+  border-radius: 0.5rem !important;
+}
+
+#details_watch {
+    display: flex;
+    justify-content: center;
+}
+
+#details_comments {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 50px;
 }
 
-.Movie {
-    display: flex;
-    align-items: center;
-    gap: 75px;
+#details_comments button {
+    width: 40%;
 }
 
-.Movie .image img {
-    width: 300px;
-    margin-bottom: 3px;
-    margin-top: 10px;
-    border-radius: 0 !important;
-}
-
-.Movie .informations {
-    width: 500px;
-}
-
-.informations p {
-    padding: 0 !important;
-}
-
-#data_container {
-    display: grid;
-    grid-template-columns: 0.53fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 10px;
-}
-
-.MovieDetails h1 {
-    margin-bottom: 20px;
-}
-
-.MovieDetails button {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 500px;
-    height: 50px;
-    border-radius: 10px;
-}
-
-.MovieDetails button:hover {
-    background-color: #f5f5f5;
-    color: #000;
-    border: 2px solid #000;
-    transition: 0.5s;
+#details_comments textarea {
+    width: 50%;
 }

@@ -66,83 +66,96 @@ function MovieDetails() {
   }
 
   return (
-    <div className="MovieDetails">
-      <button onClick={() => window.history.back()}>Go Back</button>
-      <div className="Movie">
-        <div className="image">
+    <div id="details_page">
+      <button onClick={() => window.history.back()}>↩ Go Back</button>
+      <hr />
+      <div id="details_id">
+        <div>
           <img
             src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
             alt={movie.title}
           />
         </div>
-        <div className="informations">
+        <div>
           <h1>{movie.title}</h1>
           <p>{movie.overview}</p>
         </div>
       </div>
-      <div id="data_container">
-        <div className="movie_infos">
-          <p>Movie title : {movie.title}</p>
-
-          <p>Original Title: {movie.original_title}</p>
-          <p>Runtime: {movie.runtime} minutes</p>
-        </div>
-        <div className="movie_data">
+      <hr />
+      <div id="details_content">
+        <div>
           <p>
-            Original Language:{" "}
+            <u>Movie title</u> :<br /> {movie.title}
+          </p>
+
+          <p>
+            <u>Original Title</u> :<br /> {movie.original_title}
+          </p>
+          <p>
+            <u>Runtime</u> :<br /> {movie.runtime} minutes
+          </p>
+        </div>
+        <div>
+          <p>
+            <u>Original Language</u> :<br />{" "}
             <FlagIcon code={getFlagCode(movie.original_language)} />
           </p>
-          <p>Genres: {movie.genres.map((genre) => genre.name).join(", ")}</p>
-          <p>Status: {movie.status}</p>
-          <p>Release Date: {movie.release_date}</p>
-        </div>
-        <div className="movie_stats">
           <p>
-            Rating: {Math.round(movie.vote_average * 10)}% positives votes on{" "}
-            {movie.vote_count} votes
+            <u>Genres</u> :<br />{" "}
+            {movie.genres.map((genre) => genre.name).join(", ")}
           </p>
-
-          <p style={{ display: "flex", alignItems: "center" }}>
-            Popularity: <DisplayStars score={movie.popularity} />
+          <p>
+            <u>Release Date</u> :<br /> {movie.release_date}
           </p>
         </div>
-
-        <div className="movie_team">
+        <div>
           <p>
-            Production Companies:{" "}
+            <u>Rating</u> :<br /> {Math.round(movie.vote_average * 10)}%
+            positives votes on {movie.vote_count} votes
+          </p>
+
+          <p>
+            <u>Popularity</u> :<br /> <DisplayStars score={movie.popularity} />
+          </p>
+          <p>
+            <u>Belongs To Collection</u> :<br />{" "}
+            {movie.belongs_to_collection
+              ? movie.belongs_to_collection.name
+              : "No"}
+          </p>
+        </div>
+
+        <div>
+          <p>
+            <u>Production Companies</u> :<br />{" "}
             {movie.production_companies
               .map((company) => company.name)
               .join(", ")}
           </p>
           <p>
-            Production Countries:{" "}
-            {movie.production_countries
-              .map((country) => country.name)
-              .join(", ")}
+            <u>Budget</u> :<br />{" "}
+            {movie.budget ? formatCurrency(movie.budget) : "No Data"}
           </p>
           <p>
-            Belongs To Collection:{" "}
-            {movie.belongs_to_collection
-              ? movie.belongs_to_collection.name
-              : "No"}
-          </p>
-          <p>
-            Budget: {movie.budget ? formatCurrency(movie.budget) : "No Data"}
-          </p>
-          <p>
-            Revenue: {movie.revenue ? formatCurrency(movie.revenue) : "No Data"}
+            <u>Revenue</u> :<br />{" "}
+            {movie.revenue ? formatCurrency(movie.revenue) : "No Data"}
           </p>
         </div>
       </div>
-
-      <button>
-        Watch here : <a href={movie.homepage}>{movie.homepage}</a>
-      </button>
+      <hr />
+      <div id="details_watch">
+        <button>
+          <u>Watch here</u> :<br />{" "}
+          <a href={movie.homepage}>{movie.homepage}</a>
+        </button>
+      </div>
+      <hr />
+      <div id="details_comments">
         <button onClick={addComment}>Add Comment</button>
         <textarea id="comment" />
         <div id="comments"></div>
-      <div>
       </div>
+      <div></div>
     </div>
   );
 }
