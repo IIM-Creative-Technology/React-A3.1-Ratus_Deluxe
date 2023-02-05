@@ -83,13 +83,13 @@ function App() {
 
   return (
     <div className='App'>
-      <h2 className='page_title'>Liste des Films Populaires</h2>
-      <button onClick={handlePopular}>Films Populaires</button>
-      <button onClick={handleEnglish}>En anglais</button>
-      <button onClick={handleIntheaters}>À l'affiche</button>
-      <Link to='/favorites'>Mes favoris</Link>
+      <h2 className='page_title'>List of Popular Movies</h2>
+      <button onClick={handlePopular}>Popular Movies</button>
+      <button onClick={handleEnglish}>In French</button>
+      <button onClick={handleIntheaters}>On display</button> |
+      <button><Link to='/favorites'>My favorites</Link></button>
       {enChargement ? (
-        <p>Chargement...</p>
+        <p>Loading ...</p>
       ) : (
         <div id="conteneur_film">
           {films.slice(0, 10).map((film) => (
