@@ -60,9 +60,11 @@ function MovieDetails() {
     const saveImage = (film) => {
       if (isImageSaved(film)) {
         localStorage.removeItem(`film_${film.id}`);
+        window.location.reload();
         return;
       } else {
       localStorage.setItem(`film_${film.id}`, film.poster_path);
+      window.location.reload();
       }
     }
   
