@@ -1,6 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+
+* {
+  font-family: 'Staatliches', cursive;
+  letter-spacing: 0.05rem;
+}
+
 .App {
   text-align: center;
   padding: 1rem 0rem;
+}
+
+.page_title {
+  color: white;
+  font-size: 3rem;
+  margin: 0;
+  padding: 0;
 }
 
 #conteneur_film {
@@ -51,10 +65,12 @@ button {
   font-size: 16px;
   margin: 10px;
   transition: all 0.2s ease-in-out;
+  border: solid 1px #1e88e5;
 }
 
 button:hover {
   background-color: #1e88e5;
+  border: solid 1px #acd8ff;
   cursor: pointer;
 }
 
