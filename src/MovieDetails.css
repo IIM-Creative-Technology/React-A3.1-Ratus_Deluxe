@@ -55,6 +55,12 @@ hr {
     justify-content: center;
 }
 
+#details_watch button {
+    width: 15rem !important;
+    height: 5rem !important;
+    font-size: 2rem !important;
+}
+
 #details_comments {
     display: flex;
     flex-direction: column;

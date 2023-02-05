@@ -85,69 +85,68 @@ function MovieDetails() {
       <div id="details_content">
         <div>
           <p>
-            <u>Movie title</u> :<br /> {movie.title}
+            <u>Movie title</u> :<br /> <h3>{movie.title}</h3>
           </p>
 
           <p>
-            <u>Original Title</u> :<br /> {movie.original_title}
+            <u>Original Title</u> :<br /> <h3>{movie.original_title}</h3>
           </p>
           <p>
-            <u>Runtime</u> :<br /> {movie.runtime} minutes
+            <u>Runtime</u> :<br /> <h3>{movie.runtime} minutes</h3>
           </p>
         </div>
         <div>
           <p>
             <u>Original Language</u> :<br />{" "}
-            <FlagIcon code={getFlagCode(movie.original_language)} />
+            <h3><FlagIcon code={getFlagCode(movie.original_language)} /></h3>
           </p>
           <p>
             <u>Genres</u> :<br />{" "}
-            {movie.genres.map((genre) => genre.name).join(", ")}
+            <h3>{movie.genres.map((genre) => genre.name).join(", ")}</h3>
           </p>
           <p>
-            <u>Release Date</u> :<br /> {movie.release_date}
+            <u>Release Date</u> :<br /> <h3>{movie.release_date}</h3>
           </p>
         </div>
         <div>
           <p>
-            <u>Rating</u> :<br /> {Math.round(movie.vote_average * 10)}%
-            positives votes on {movie.vote_count} votes
+            <u>Rating</u> :<br /> <h3>{Math.round(movie.vote_average * 10)}%
+            positives votes on {movie.vote_count} votes</h3>
           </p>
 
           <p>
-            <u>Popularity</u> :<br /> <DisplayStars score={movie.popularity} />
+            <u>Popularity</u> :<br /> <h3><DisplayStars score={movie.popularity} /></h3>
           </p>
           <p>
-            <u>Belongs To Collection</u> :<br />{" "}
+            <u>Belongs To Collection</u> :<br /><h3>{" "}
             {movie.belongs_to_collection
               ? movie.belongs_to_collection.name
-              : "No"}
+              : "No"}</h3>
           </p>
         </div>
 
         <div>
           <p>
-            <u>Production Companies</u> :<br />{" "}
+            <u>Production Companies</u> :<br /><h3>{" "}
             {movie.production_companies
               .map((company) => company.name)
-              .join(", ")}
+              .join(", ")}</h3>
           </p>
           <p>
-            <u>Budget</u> :<br />{" "}
-            {movie.budget ? formatCurrency(movie.budget) : "No Data"}
+            <u>Budget</u> :<br /> <h3>{" "}
+            {movie.budget ? formatCurrency(movie.budget) : "No Data"}</h3>
           </p>
           <p>
-            <u>Revenue</u> :<br />{" "}
-            {movie.revenue ? formatCurrency(movie.revenue) : "No Data"}
+            <u>Revenue</u> :<br /> <h3>{" "}
+            {movie.revenue ? formatCurrency(movie.revenue) : "No Data"}</h3>
           </p>
         </div>
       </div>
       <hr />
       <div id="details_watch">
-        <button>
-          <u>Watch here</u> :<br />{" "}
-          <a href={movie.homepage}>{movie.homepage}</a>
-        </button>
+        <a href={movie.homepage} target="_blank">
+          <button>Watch here</button>
+        </a>
       </div>
       <hr />
       <div id="details_comments">
