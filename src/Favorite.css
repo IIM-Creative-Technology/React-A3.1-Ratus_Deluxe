@@ -1,0 +1,24 @@
+.Favorite{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.contener_favorite{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+img{
+    width: 200px;
+    margin-bottom: 3px;
+    margin-top: 10px;
+    border-radius: 0 !important;
+}

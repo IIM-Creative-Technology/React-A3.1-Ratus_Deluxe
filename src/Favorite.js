@@ -1,3 +1,4 @@
+import './Favorite.css';
 import React, { useState, useEffect } from 'react';
 
 const FavoritesPage = () => {
@@ -21,15 +22,17 @@ const FavoritesPage = () => {
     }, []);
 
     return (
-        <div>
+        <div className='Favorite'>
             <h1>My Favorite Images</h1>
             <button onClick={() => window.history.back()}>Go Back</button>
             {/* Affiche les images sauvegardées dans le local storage */}
-            {favorites.map(film => (
-                <div key={film}>
-                    <img src={film} alt={film} />
-                </div>
-            ))}
+            <div className='contener_favorite'>
+                {favorites.map(film => (
+                    <div key={film}>
+                        <img src={`https://image.tmdb.org/t/p/w200${film}`} alt={film} />
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
