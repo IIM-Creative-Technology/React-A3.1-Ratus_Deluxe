@@ -14,6 +14,8 @@ function App() {
   // État qui indique si les données sont en train de charger
   const [enChargement, setEnChargement] = useState(false);
 
+  
+
   // Lorsque la page actuelle change, effectue un fetch depuis l'API TMDB
   useEffect(() => {
     setEnChargement(true); // Définit que les données sont en train de charger
@@ -76,8 +78,28 @@ function App() {
     setFilms(filmsRaw);
   };
 
+
+    // const [inputValue, setInputValue] = useState('');
+    // const [suggestions, setSuggestions] = useState([]);
+  
+    // const handleInputChange = (event) => {
+    //   setInputValue(event.target.value);
+    //   setSuggestions(getSuggestions(event.target.value));
+    // };
+
+
+
+    // const getSuggestions = (value) => {
+    //   return [
+    //     setFilms(filmsRaw),
+    //   ].filter((suggestion) => suggestion.toLowerCase().startsWith(value.toLowerCase()));
+    // };
+
   return (
     <div className='App'>
+      {/* <input type="text" value={inputValue} onChange={handleInputChange} />
+      
+      */}
       <h2>Liste des Films Populaires</h2>
       <button onClick={handlePopular}>Films Populaires</button>
       <button onClick={handleEnglish}>En anglais</button>
