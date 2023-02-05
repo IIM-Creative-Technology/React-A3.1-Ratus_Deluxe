@@ -68,7 +68,8 @@ function MovieDetails() {
   return (
     <div id="details_page">
       <button onClick={() => window.history.back()}>↩ Go Back</button>
-      <hr />
+      
+      <section className="details_id">
       <div id="details_id">
         <div>
           <img
@@ -78,10 +79,12 @@ function MovieDetails() {
         </div>
         <div>
           <h1>{movie.title}</h1>
-          <p>{movie.overview}</p>
+          <h2>{movie.overview}</h2>
         </div>
       </div>
-      <hr />
+      </section>  
+      
+      <section className="details_content">
       <div id="details_content">
         <div>
           <p>
@@ -98,7 +101,7 @@ function MovieDetails() {
         <div>
           <p>
             <u>Original Language</u> :<br />{" "}
-            <h3><FlagIcon code={getFlagCode(movie.original_language)} /></h3>
+            <h2><FlagIcon code={getFlagCode(movie.original_language)} /></h2>
           </p>
           <p>
             <u>Genres</u> :<br />{" "}
@@ -142,18 +145,23 @@ function MovieDetails() {
           </p>
         </div>
       </div>
-      <hr />
+      </section>
+      
+      <section className="details_watch">
       <div id="details_watch">
         <a href={movie.homepage} target="_blank">
           <button>Watch here</button>
         </a>
       </div>
-      <hr />
+      </section>
+      
+      <section className="details_comments">
       <div id="details_comments">
         <button onClick={addComment}>Add Comment</button>
         <textarea id="comment" />
         <div id="comments"></div>
       </div>
+      </section>
       <div></div>
     </div>
   );

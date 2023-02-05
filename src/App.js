@@ -83,7 +83,7 @@ function App() {
 
   return (
     <div className='App'>
-      <h2>Liste des Films Populaires</h2>
+      <h2 className='page_title'>Liste des Films Populaires</h2>
       <button onClick={handlePopular}>Films Populaires</button>
       <button onClick={handleEnglish}>En anglais</button>
       <button onClick={handleIntheaters}>À l'affiche</button>
