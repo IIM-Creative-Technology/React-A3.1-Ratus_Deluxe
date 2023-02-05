@@ -72,8 +72,7 @@ hr {
 }
 
 .favorite {
-    background-color: transparent;
-    color: #000;
+    width: 100%;
 }
 
 #details_comments {

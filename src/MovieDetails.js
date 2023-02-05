@@ -56,22 +56,22 @@ function MovieDetails() {
     return languageCodeMap[language] || language;
   };
 
-    // Fonction qui sauvegarde les images dans le local storage
-    const saveImage = (film) => {
-      if (isImageSaved(film)) {
-        localStorage.removeItem(`film_${film.id}`);
-        window.location.reload();
-        return;
-      } else {
+  // Fonction qui sauvegarde les images dans le local storage
+  const saveImage = (film) => {
+    if (isImageSaved(film)) {
+      localStorage.removeItem(`film_${film.id}`);
+      window.location.reload();
+      return;
+    } else {
       localStorage.setItem(`film_${film.id}`, film.poster_path);
       window.location.reload();
-      }
     }
-  
-    // Fonction qui vérifie si l'image est sauvegardée dans le local storage
-    const isImageSaved = (film) => {
-      return localStorage.getItem(`film_${film.id}`) !== null;
-    }
+  };
+
+  // Fonction qui vérifie si l'image est sauvegardée dans le local storage
+  const isImageSaved = (film) => {
+    return localStorage.getItem(`film_${film.id}`) !== null;
+  };
 
   // Fonction qui affiche les étoiles
   function DisplayStars({ score }) {
@@ -88,104 +88,121 @@ function MovieDetails() {
     <div id="details_page">
       <button onClick={() => window.history.back()}>↩ Go Back</button>
       <section className="details_id">
-      <div id="details_id">
-        <div className="image">
-        <img
-            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-            alt={movie.title}
-            onClick={() => saveImage(movie)} // Sauvegarde l'image dans le local storage
-          />
+        <div id="details_id">
+          <div className="image">
+            <img
+              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+              alt={movie.title}
+              onClick={() => saveImage(movie)} // Sauvegarde l'image dans le local storage
+            />
+          </div>
+          <div>
+            <h1>{movie.title}</h1>
+            <h2>{movie.overview}</h2>
+            <button className="favorite" onClick={() => saveImage(movie)}>
+              {isImageSaved(movie) ? "Added to favorite |❤️" : "Add to favorite |🖤"}
+            </button>
+          </div>
         </div>
-        <div>
-          <h1>{movie.title}</h1>
-          <h2>{movie.overview}</h2>
-          <button
-            className="favorite"
-            onClick={() => saveImage(movie)}
-          >
-            {isImageSaved(movie) ? "❤️" : "🖤"}
-          </button>
-        </div>
-      </div>
-      </section>  
-      
+      </section>
+
       <section className="details_content">
-      <div id="details_content">
-        <div>
-          <p>
-            <u>Movie title</u> :<br /> <h3>{movie.title}</h3>
-          </p>
+        <div id="details_content">
+          <div>
+            <p>
+              <u>Movie title</u> :<br /> <h3>{movie.title}</h3>
+            </p>
 
-          <p>
-            <u>Original Title</u> :<br /> <h3>{movie.original_title}</h3>
-          </p>
-          <p>
-            <u>Runtime</u> :<br /> <h3>{movie.runtime} minutes</h3>
-          </p>
-        </div>
-        <div>
-          <p>
-            <u>Original Language</u> :<br />{" "}
-            <h2><FlagIcon code={getFlagCode(movie.original_language)} /></h2>
-          </p>
-          <p>
-            <u>Genres</u> :<br />{" "}
-            <h3>{movie.genres.map((genre) => genre.name).join(", ")}</h3>
-          </p>
-          <p>
-            <u>Release Date</u> :<br /> <h3>{movie.release_date}</h3>
-          </p>
-        </div>
-        <div>
-          <p>
-            <u>Rating</u> :<br /> <h3>{Math.round(movie.vote_average * 10)}%
-            positives votes on {movie.vote_count} votes</h3>
-          </p>
+            <p>
+              <u>Original Title</u> :<br /> <h3>{movie.original_title}</h3>
+            </p>
+            <p>
+              <u>Runtime</u> :<br /> <h3>{movie.runtime} minutes</h3>
+            </p>
+          </div>
+          <div>
+            <p>
+              <u>Original Language</u> :<br />{" "}
+              <h2>
+                <FlagIcon code={getFlagCode(movie.original_language)} />
+              </h2>
+            </p>
+            <p>
+              <u>Genres</u> :<br />{" "}
+              <h3>{movie.genres.map((genre) => genre.name).join(", ")}</h3>
+            </p>
+            <p>
+              <u>Release Date</u> :<br /> <h3>{movie.release_date}</h3>
+            </p>
+          </div>
+          <div>
+            <p>
+              <u>Rating</u> :<br />{" "}
+              <h3>
+                {Math.round(movie.vote_average * 10)}% positives votes on{" "}
+                {movie.vote_count} votes
+              </h3>
+            </p>
 
-          <p>
-            <u>Popularity</u> :<br /> <h3><DisplayStars score={movie.popularity} /></h3>
-          </p>
-          <p>
-            <u>Belongs To Collection</u> :<br /><h3>{" "}
-            {movie.belongs_to_collection
-              ? movie.belongs_to_collection.name
-              : "No"}</h3>
-          </p>
-        </div>
+            <p>
+              <u>Popularity</u> :<br />{" "}
+              <h3>
+                <DisplayStars score={movie.popularity} />
+              </h3>
+            </p>
+            <p>
+              <u>Belongs To Collection</u> :<br />
+              <h3>
+                {" "}
+                {movie.belongs_to_collection
+                  ? movie.belongs_to_collection.name
+                  : "No"}
+              </h3>
+            </p>
+          </div>
 
-        <div>
-          <p>
-            <u>Production Companies</u> :<br /><h3>{" "}
-            {movie.production_companies
-              .map((company) => company.name)
-              .join(", ")}</h3>
-          </p>
-          <p>
-            <u>Budget</u> :<br /> <h3>{" "}
-            {movie.budget ? formatCurrency(movie.budget) : "No Data"}</h3>
-          </p>
-          <p>
-            <u>Revenue</u> :<br /> <h3>{" "}
-            {movie.revenue ? formatCurrency(movie.revenue) : "No Data"}</h3>
-          </p>
+          <div>
+            <p>
+              <u>Production Companies</u> :<br />
+              <h3>
+                {" "}
+                {movie.production_companies
+                  .map((company) => company.name)
+                  .join(", ")}
+              </h3>
+            </p>
+            <p>
+              <u>Budget</u> :<br />{" "}
+              <h3>
+                {" "}
+                {movie.budget ? formatCurrency(movie.budget) : "No Data"}
+              </h3>
+            </p>
+            <p>
+              <u>Revenue</u> :<br />{" "}
+              <h3>
+                {" "}
+                {movie.revenue ? formatCurrency(movie.revenue) : "No Data"}
+              </h3>
+            </p>
+          </div>
         </div>
-      </div>
       </section>
-      
+
       <section className="details_watch">
-      <div id="details_watch">
-        <a href={movie.homepage} target="_blank">
-          <button>Watch here</button>
-        </a>
-      </div>
+        <div id="details_watch">
+          <a href={movie.homepage} target="_blank">
+            <button>Watch here</button>
+          </a>
+        </div>
       </section>
-      
+
       <section className="details_comments">
-      <div id="details_comments">
-        <button onClick={addComment}>Add Comment</button>
-        <textarea id="comment" />
-        <div id="comments"></div>
-      </div>
+        <div id="details_comments">
+          <button onClick={addComment}>Add Comment</button>
+          <textarea id="comment" />
+          <div id="comments"></div>
+        </div>
       </section>
       <div></div>
     </div>
