@@ -87,6 +87,7 @@ function App() {
       <button onClick={handlePopular}>Films Populaires</button>
       <button onClick={handleEnglish}>En anglais</button>
       <button onClick={handleIntheaters}>À l'affiche</button>
+      <Link to='/favorites'>Mes favoris</Link>
       {enChargement ? (
         <p>Chargement...</p>
       ) : (

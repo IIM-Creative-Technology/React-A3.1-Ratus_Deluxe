@@ -51,10 +51,27 @@ function MovieDetails() {
     zh: "cn",
   };
 
+  // Fonction qui récupère le code de la langue
   const getFlagCode = (language) => {
     return languageCodeMap[language] || language;
   };
 
+    // Fonction qui sauvegarde les images dans le local storage
+    const saveImage = (film) => {
+      if (isImageSaved(film)) {
+        localStorage.removeItem(`film_${film.id}`);
+        return;
+      } else {
+      localStorage.setItem(`film_${film.id}`, film.poster_path);
+      }
+    }
+  
+    // Fonction qui vérifie si l'image est sauvegardée dans le local storage
+    const isImageSaved = (film) => {
+      return localStorage.getItem(`film_${film.id}`) !== null;
+    }
+
+  // Fonction qui affiche les étoiles
   function DisplayStars({ score }) {
     const maxStars = 5;
     const starPercentage = (score / 1000) * maxStars;
@@ -70,14 +87,21 @@ function MovieDetails() {
       <button onClick={() => window.history.back()}>Go Back</button>
       <div className="Movie">
         <div className="image">
-          <img
+        <img
             src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
             alt={movie.title}
+            onClick={() => saveImage(movie)} // Sauvegarde l'image dans le local storage
           />
         </div>
         <div className="informations">
           <h1>{movie.title}</h1>
           <p>{movie.overview}</p>
+          <button
+            className="favorite"
+            onClick={() => saveImage(movie)}
+          >
+            {isImageSaved(movie) ? "❤️" : "🖤"}
+          </button>
         </div>
       </div>
       <div id="data_container">

@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import MovieDetails from "./MovieDetails";
+import Favorite from "./Favorite";
 import reportWebVitals from './reportWebVitals';
 
 export default function Application() {
@@ -12,6 +13,7 @@ export default function Application() {
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/movies/:id" element={<MovieDetails />} />
+        <Route path="/favorites" element={<Favorite />} />
       </Routes>
     </BrowserRouter>
   );
